@@ -1,0 +1,27 @@
+class Solution
+{
+    public static void sort012(int a[], int n)
+    {
+        int zeros = 0;
+        int twos = a.length-1;
+        int i =0;
+        
+        while(i<=twos){
+            if(a[i]==0){
+                int temp = a[i];
+                a[i] = a[zeros];
+                a[zeros] = temp;
+                zeros++;
+                i++;
+            }else if(a[i]==2){
+                int temp = a[i];
+                a[i] = a[twos];
+                a[twos]=temp;
+                twos--;
+            }else{
+                i++;
+            }
+        }
+        
+    }
+}
