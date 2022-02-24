@@ -1,0 +1,34 @@
+class Solution {
+    int findMaximum(int[] arr, int n) {
+        int low =0;
+        int high = n-1;
+        return getMax(arr,low,high);
+    }   
+    
+    int getMax(int[] arr, int low, int high){
+        
+        if(low==high){
+            return arr[low];
+        }
+        
+        if(high-low == 1 && arr[low]>=arr[high]){
+            return arr[low];
+        }
+        
+        if(high-low == 1 && arr[low]<arr[high]){
+            return arr[high];
+        }
+        int mid = (low+high)/2;
+        
+        if(arr[mid]>arr[mid+1] && arr[mid]>arr[mid-1]){
+            return arr[mid];
+        }else if(arr[mid]>arr[mid-1]){
+            return getMax(arr,mid+1,high);
+        }else{
+            return getMax(arr,low,mid-1);
+        }
+        
+        
+        
+    }
+}
