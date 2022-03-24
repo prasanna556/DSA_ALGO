@@ -1,0 +1,32 @@
+Noble integer
+
+public static int getNobleNumber(int[] arr){
+	    int size = arr.length;
+	    int[] temp = new int[size+1];
+	    
+	    for(int i=0;i<size;i++){
+	        
+	        if (arr[i] < 0) {
+                continue;
+            } else if(arr[i]>size){
+	           ++temp[size];
+	        }else {
+	            ++temp[arr[i]];
+	        }
+	    }
+	    
+	    int init_count = temp[size];
+	    
+	    for(int j=size-1;j>=0;j--){
+	        if(temp[j]>0 && init_count == j){
+	            return j;
+	        }else if(init_count>j){
+	            return -1;
+	        }
+	        init_count += temp[j];
+	    }
+	    
+	    
+	    return -1;
+	    
+	}
