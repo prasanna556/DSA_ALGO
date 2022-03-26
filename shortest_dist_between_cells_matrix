@@ -1,0 +1,50 @@
+Shortest Distance Between Two Cells in Matrix
+class Solution {
+    
+    public boolean isSafe(int newX,int newY,boolean[][] visited, int[][] grid,int size){
+        
+        return (newX>=0 && newX<size && newY>=0 && newY<size && !visited[newX][newY] && grid[newX][newY] !=1);
+        
+    }
+    
+    public int shortestPathBinaryMatrix(int[][] grid) {
+       
+        int[][] dir = {{1,0},{1,1},{0,1},{-1,1},{-1,0},{-1,-1},{0,-1},{1,-1}};
+        
+        int m = grid.length;
+        if(grid[0][0] == 1 || grid[m-1][m-1] == 1){
+            return -1;
+        }
+        
+        boolean[][] visited = new boolean[m][m];
+        int length =0;
+        Queue<int[]> queue = new LinkedList<>();
+        queue.add(new int[]{0,0});
+        
+        while(!queue.isEmpty()){
+            int size = queue.size();
+            
+            for(int i=0;i<size;i++){
+                
+                int[] p = queue.remove();
+                
+                if(p[0] == m-1 && p[1] == m-1){
+                    return length+1;
+                }
+                
+                for(int j=0;j<8;j++){
+                    int newX = p[0]+ dir[j][0];
+                    int newY = p[1]+ dir[j][1];
+                    
+                    if(isSafe(newX,newY,visited,grid,m)){
+                        queue.add(new int[]{newX,newY});
+                        visited[newX][newY] = true;
+                    }
+                    
+                } 
+            }
+            length++;
+        }
+        return -1;
+    }
+}
