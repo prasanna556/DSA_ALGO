@@ -1,0 +1,86 @@
+class Solution
+{
+    void bitonicGenerator(long arr[], int n)
+    {
+        // arrange the array in first even and then odd placed numbers
+        int i=0;
+        int j=0;
+        long temp;
+        
+        while(i<n && j<n){
+            temp = arr[i];
+            arr[i] = arr[j];
+            arr[j] = temp;
+            
+            i++;
+            j= j+2;
+        }
+        // sort first subarray ascending
+        if(n%2 == 0){
+            ascendingSort(arr,0,(n/2)-1);    
+            descendingSort(arr,(n/2),n-1);
+        }else{
+            ascendingSort(arr,0,(n/2));    
+            descendingSort(arr,(n/2)+1,n-1);
+        }
+    }
+    
+    void ascendingSort(long[] arr, int low, int high){
+        if(low<high){
+            int partition = partition(arr,low, high);
+            ascendingSort(arr,low,partition-1);
+            ascendingSort(arr,partition+1,high);    
+        }
+    }
+    
+    int partition(long[] arr, int low, int high){
+        int i= low -1;
+        int pivot = high;
+        
+        for(int j = low;j<high;j++){
+            if(arr[j]<arr[pivot]){
+                i++;
+                long temp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = temp;
+            }
+        }
+        long temp = arr[i+1];
+        arr[i+1] = arr[pivot];
+        arr[pivot] = temp;
+        
+        return i+1;
+        
+    }
+    
+    
+    //descending sort
+    
+     void descendingSort(long[] arr, int low, int high){
+        if(low<high){
+            int partition = partition1(arr,low, high);
+            descendingSort(arr,low,partition-1);
+            descendingSort(arr,partition+1,high);    
+        }
+    }
+    
+    int partition1(long[] arr, int low, int high){
+        int i= low -1;
+        int pivot = high;
+        
+        for(int j = low;j<high;j++){
+            if(arr[j]>arr[pivot]){
+                i++;
+                long temp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = temp;
+            }
+        }
+        long temp = arr[i+1];
+        arr[i+1] = arr[pivot];
+        arr[pivot] = temp;
+        
+        return i+1;
+        
+    }
+}
