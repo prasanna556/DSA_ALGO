@@ -1,0 +1,26 @@
+static int countSubarrWithEqualZeroAndOne(int arr[], int n)
+    {
+        Map<Integer,Integer> map = new HashMap<>();
+        int currSum =0;
+        int result =0;
+        for(int i=0;i<n;i++){
+            if(arr[i] == 0){
+                arr[i] = -1;
+            }
+            currSum += arr[i];
+            
+            if(currSum ==0){
+                result++;
+            }
+            
+            if(map.containsKey(currSum)){
+                int temp = map.get(currSum);
+                result += temp;
+                map.put(currSum,temp+1);
+            }else{
+                map.put(currSum,1);
+            }
+        }
+        return result;
+        
+    }
