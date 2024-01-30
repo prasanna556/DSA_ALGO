@@ -1,0 +1,86 @@
+Reverse String Word Wise
+
+Reverse the given string word-wise. The last word in the given string should come at 1st place, the last-second word at 2nd place, and so on. Individual words should remain as it is.
+
+Constraints :
+0 <= |S| <= 10^5
+where |S| represents the length of string, S.
+Sample Input 1:
+Welcome to Coding Ninjas
+Sample Output 1:
+Ninjas Coding to Welcome
+Sample Input 2:
+Always indent your code
+Sample Output 2:
+code your indent Always
+
+
+
+
+Approach -1
+
+import java.util.Scanner;
+
+class Solution {
+
+    static String reverseStringWordWise(String input) {
+       char[] arr = input.toCharArray();
+       int start = 0;
+       int end = 0;
+        for (int i=0;i<arr.length;i++) {
+            if (arr[i] == ' ') {
+                end = i-1;
+                reverse(arr,start,end);
+                start = i+1;
+            }
+        }
+        reverse(arr,start,arr.length-1);
+        reverse(arr,0,arr.length-1);
+        return new String(arr);
+    }
+
+    static void reverse(char[] arr, int start, int end) {
+        while(start<end) {
+            char temp = arr[start];
+            arr[start] = arr[end];
+            arr[end] = temp;
+            start++;
+            end--;
+        }
+    } 
+
+    public static void main(String args[]) {
+        Scanner sc = new Scanner(System.in);
+        String input = sc.nextLine();
+        String ans = reverseStringWordWise(input);
+        System.out.println(ans);
+    }
+}
+
+Approach -2
+
+import java.util.Scanner;
+
+class Solution {
+
+    static String reverseStringWordWise(String input) {
+        String[] str= input.split(" ");
+        int n=str.length;
+        for(int i=0;i<n/2;i++){
+            String temp=str[i];
+            str[i]=str[n-1-i];
+            str[n-1-i]=temp;
+        }
+        return String.join(" ", str);
+    }
+
+    public static void main(String args[]) {
+        Scanner sc = new Scanner(System.in);
+        String input = sc.nextLine();
+        String ans = reverseStringWordWise(input);
+        System.out.println(ans);
+
+
+        
+    }
+}
