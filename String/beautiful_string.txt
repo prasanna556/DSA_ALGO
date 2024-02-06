@@ -1,0 +1,57 @@
+Problem statement
+Send feedback
+Ninja has been given a binary string ‘STR’ containing either ‘0’ or ‘1’. A binary string is called beautiful if it contains alternating 0s and 1s.
+For Example:‘0101’, ‘1010’, ‘101’, ‘010’ are beautiful strings.
+He wants to make ‘STR’ beautiful by performing some operations on it. In one operation, Ninja can convert ‘0’ into ‘1’ or vice versa.
+Your task is to determine the minimum number of operations Ninja should perform to make ‘STR’ beautiful.
+For Example :
+Minimum operations to make ‘STR’ ‘0010’ beautiful is ‘1’. In one operation, we can convert ‘0’ at index ‘0’ (0-based indexing) to ‘1’. The ‘STR’ now becomes ‘1010’ which is a beautiful string. 
+
+Sample Input 1 :
+2
+0000
+1010
+Sample Output 1 :
+2
+0
+Explanation of Sample Input 1 :
+For the first test case:
+The two beautiful strings that can be formed from the given ‘STR’ 
+are “1010” and “0101”. Ninja can transform ‘STR’ to “1010” by 
+performing the following operations:
+Replace ‘0’ at index 0 by ‘1’.
+Replace ‘0’ at index 2 by ‘1’.
+
+Ninja can transform ‘STR’ to “0101” by performing the following 
+operations:
+Replace ‘0' at index 1 by ‘1’.
+Replace ‘0’ at index 3 by ‘1’.
+
+The minimum number of operations in transforming ‘STR’ to either of the two beautiful strings is 2.
+
+For the second test case:
+Given ‘STR’ is already beautiful so the minimum number of operations required is 0.
+
+
+public class Solution {
+    public static int makeBeautiful(String str) {
+        char[] arr = str.toCharArray();
+        int t1 = 0;
+        int t2 = 0;
+        char s1 = '0';
+        char s2 = '1';
+
+        for(int i=0;i<arr.length;i++) {
+            if (arr[i] != s1) {
+                t1++;
+            }else {
+                t2++;
+            }
+            s1 = (s1=='0')?'1':'0';
+            s2 = (s2 == '0') ? '1' : '0';
+        }
+
+        return (t1>t2)?t2:t1;
+
+    }
+}
