@@ -1,0 +1,45 @@
+Problem statement
+Ninja is now bored with numbers and is now playing with characters but hates when he gets repeated characters. Ninja is provided a string, and he wants to return the first unique character in the string.The string will contain characters only from the English alphabet set, i.e., ('A' - 'Z') and ('a' - 'z'). If there is no non-repeating character, print the first character of the string. If there is no non-repeating character, return the first character of the string.
+
+Sample Input 1 :
+2
+aDcadhc
+AabBcC
+Sample Output 1:
+ D
+ A
+Explanation for Sample Input 1:
+In the first test case, ‘a’ is repeated.’ D’ is the first non-repeating character in the string, so we return it.
+
+In the second test case, all the characters are non-repeating, so we return the first character.
+
+
+Solution:
+
+import java.util.* ;
+import java.util.Map.Entry;
+import java.io.*; 
+public class Solution {
+
+	public static char firstNonRepeatingCharacter(String str) {
+
+		Map<Character,Integer> map = new LinkedHashMap<>();
+
+		for (int index = 0; index < str.length(); index++) {
+			Character ch = str.charAt(index);
+			if (map.containsKey(ch)) {
+				int value = map.get(ch);
+				map.put(ch, ++value);
+			}else {
+				map.put(ch,1);
+			}
+		}
+
+		for (Entry<Character,Integer> entry : map.entrySet()) {
+			if(entry.getValue() == 1) {
+				return entry.getKey();
+			}
+		}
+		return str.charAt(0);
+	}
+}
